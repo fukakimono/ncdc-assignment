@@ -22,3 +22,7 @@ npm run format:check  # フォーマット確認
 ```
 
 整形する場合は`npm run format`。テストは未実装。
+
+## 素材
+
+提供されたアイコンを`src/assets/img/icon/`に置いている。importには`@assets`を使える。
