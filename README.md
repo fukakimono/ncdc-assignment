@@ -26,3 +26,5 @@ npm run format:check  # フォーマット確認
 ## 素材
 
 提供されたアイコンを`src/assets/img/icon/`に置いている。importには`@assets`を使える。
+
+Noto Sans JPはGoogle Fontsから読み込んでいる。

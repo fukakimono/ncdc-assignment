@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #333333;
+  background: #ffffff;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+}
