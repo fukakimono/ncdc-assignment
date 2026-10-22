@@ -1,14 +1,26 @@
 import logo from "@assets/img/icon/logo.svg";
-import type { Content } from "../types";
+import type { Content, ContentOperation } from "../types";
 import "./Sidebar.css";
 
 interface SidebarProps {
   contents: Content[];
   loading: boolean;
   error: string | null;
+  selectedId: number | null;
+  operation: ContentOperation;
+  onSelect: (id: number) => void;
 }
 
-export function Sidebar({ contents, loading, error }: SidebarProps) {
+export function Sidebar({
+  contents,
+  loading,
+  error,
+  selectedId,
+  operation,
+  onSelect,
+}: SidebarProps) {
+  const busy = operation !== "idle";
+
   return (
     <aside className="sidebar" aria-label="ページ一覧">
       <div className="service-name">
@@ -29,8 +41,16 @@ export function Sidebar({ contents, loading, error }: SidebarProps) {
         <ul className="page-list">
           {contents.map((content) => (
             <li key={content.id} className="page-list-item">
-              {/* APIはタイトルにnull・空文字を許容するため、表示時のみ「無題」で補う */}
-              <span className="page-list-title">{content.title || "無題"}</span>
+              <button
+                className="page-list-button"
+                type="button"
+                onClick={() => onSelect(content.id)}
+                disabled={busy}
+                aria-current={content.id === selectedId ? "page" : undefined}
+              >
+                {/* APIはタイトルにnull・空文字を許容するため、表示時のみ「無題」で補う */}
+                {content.title || "無題"}
+              </button>
             </li>
           ))}
         </ul>

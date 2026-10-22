@@ -1,3 +1,5 @@
+export type ContentOperation = "idle" | "selecting";
+
 export interface Content {
   id: number;
   title: string | null;

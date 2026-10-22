@@ -9,3 +9,40 @@
   height: 100vh;
   padding: 30px 40px 60px;
 }
+
+.content-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px;
+  grid-template-rows: 40px minmax(0, 1fr);
+  gap: 20px;
+  height: 100%;
+  padding: 30px;
+  border-radius: 16px;
+  background: #f5f8fa;
+}
+
+.content-title {
+  grid-column: 1;
+  margin: 0;
+  padding: 0 30px;
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 700;
+}
+
+.content-body {
+  grid-column: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 30px;
+  overflow-y: auto;
+  border-radius: 8px;
+  background: #ffffff;
+  line-height: 24px;
+  white-space: pre-wrap;
+}
+
+.content-message {
+  grid-column: 1 / -1;
+  margin: 0;
+}
