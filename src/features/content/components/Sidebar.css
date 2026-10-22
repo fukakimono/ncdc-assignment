@@ -60,6 +60,31 @@
   margin: 0;
 }
 
+.delete-page-button {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.delete-page-button:hover:not(:disabled) {
+  background: #e6e6e6;
+}
+
+.delete-page-button:active:not(:disabled) {
+  background: #cccccc;
+}
+
+.delete-page-button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
 .sidebar-actions {
   display: flex;
   margin-top: auto;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "../../../components/Button";
 import logo from "@assets/img/icon/logo.svg";
+import deleteIcon from "@assets/img/icon/delete.svg";
 import type { Content, ContentOperation } from "../types";
 import "./Sidebar.css";
 
@@ -12,6 +13,7 @@ interface SidebarProps {
   operation: ContentOperation;
   onSelect: (id: number) => void;
   onCreate: () => void;
+  onDelete: (id: number) => void;
 }
 
 export function Sidebar({
@@ -22,6 +24,7 @@ export function Sidebar({
   operation,
   onSelect,
   onCreate,
+  onDelete,
 }: SidebarProps) {
   const [isEditing, setIsEditing] = useState(false);
   const busy = operation !== "idle";
@@ -56,6 +59,17 @@ export function Sidebar({
                 {/* APIはタイトルにnull・空文字を許容するため、表示時のみ「無題」で補う */}
                 {content.title || "無題"}
               </button>
+              {isEditing && (
+                <button
+                  className="delete-page-button"
+                  type="button"
+                  aria-label={`${content.title || "無題"}を削除`}
+                  onClick={() => onDelete(content.id)}
+                  disabled={busy}
+                >
+                  <img src={deleteIcon} alt="" width="24" height="24" />
+                </button>
+              )}
             </li>
           ))}
         </ul>

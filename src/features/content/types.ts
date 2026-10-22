@@ -1,4 +1,4 @@
-export type ContentOperation = "idle" | "selecting" | "creating";
+export type ContentOperation = "idle" | "selecting" | "creating" | "deleting";
 
 export interface Content {
   id: number;

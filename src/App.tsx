@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "./features/content/components/Sidebar";
-import { createContent, getContent, getContents } from "./features/content/api";
+import { createContent, deleteContent, getContent, getContents } from "./features/content/api";
 import type { Content, ContentOperation } from "./features/content/types";
 import "./App.css";
 
@@ -45,6 +45,21 @@ function App() {
       .finally(() => setOperation("idle"));
   };
 
+  const handleDelete = (id: number) => {
+    if (!window.confirm("このページを削除しますか？")) return;
+
+    setOperation("deleting");
+    setDetailError(null);
+
+    deleteContent(id)
+      .then(() => {
+        setContents((current) => current.filter((content) => content.id !== id));
+        setSelectedContent((current) => (current?.id === id ? null : current));
+      })
+      .catch(() => setDetailError("ページを削除できませんでした。"))
+      .finally(() => setOperation("idle"));
+  };
+
   return (
     <div className="app">
       <Sidebar
@@ -55,6 +70,7 @@ function App() {
         operation={operation}
         onSelect={handleSelect}
         onCreate={handleCreate}
+        onDelete={handleDelete}
       />
       <main className="main-area" aria-label="ページ本文">
         <section className="content-panel">
