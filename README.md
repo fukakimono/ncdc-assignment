@@ -16,12 +16,19 @@ npm run dev
 ## 確認用コマンド
 
 ```bash
+npm test              # テストを実行
 npm run build         # 型チェック・ビルド
 npm run lint          # 静的解析
 npm run format:check  # フォーマット確認
 ```
 
-整形する場合は`npm run format`。テストは未実装。
+整形する場合は`npm run format`。
+
+テストはVitestのBrowser Modeで実行する。API通信は差し替えるため、バックエンドの起動は不要。初回はChromiumをインストールする。
+
+```bash
+npx playwright install chromium --only-shell
+```
 
 ## 素材
 
