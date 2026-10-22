@@ -5,3 +5,13 @@ export interface Content {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CreateContentInput {
+  title?: string;
+  body?: string;
+}
+
+export interface UpdateContentInput {
+  title?: string;
+  body?: string;
+}
