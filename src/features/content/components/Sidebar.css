@@ -59,3 +59,14 @@
 .sidebar-message {
   margin: 0;
 }
+
+.sidebar-actions {
+  display: flex;
+  margin-top: auto;
+  padding: 10px 10px 10px 40px;
+  background: #f6f8fa;
+}
+
+.sidebar-actions > :last-child {
+  margin-left: auto;
+}

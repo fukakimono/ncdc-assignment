@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "./features/content/components/Sidebar";
-import { getContent, getContents } from "./features/content/api";
+import { createContent, getContent, getContents } from "./features/content/api";
 import type { Content, ContentOperation } from "./features/content/types";
 import "./App.css";
 
@@ -29,6 +29,22 @@ function App() {
       .finally(() => setOperation("idle"));
   };
 
+  const handleCreate = () => {
+    setOperation("creating");
+    setDetailError(null);
+
+    createContent({
+      title: "新しいページ",
+      body: "ここに本文を入力してください。",
+    })
+      .then((content) => {
+        setContents((current) => [...current, content]);
+        setSelectedContent(content);
+      })
+      .catch(() => setDetailError("ページを作成できませんでした。"))
+      .finally(() => setOperation("idle"));
+  };
+
   return (
     <div className="app">
       <Sidebar
@@ -38,6 +54,7 @@ function App() {
         selectedId={selectedContent?.id ?? null}
         operation={operation}
         onSelect={handleSelect}
+        onCreate={handleCreate}
       />
       <main className="main-area" aria-label="ページ本文">
         <section className="content-panel">
