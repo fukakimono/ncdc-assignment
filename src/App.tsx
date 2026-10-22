@@ -93,13 +93,9 @@ function App() {
         onCreate={handleCreate}
         onDelete={handleDelete}
       />
-      <main className="main-area" aria-label="ページ本文">
+      <main className="main-area" aria-label="ページ本文" aria-busy={operation === "selecting"}>
         <section className="content-panel">
-          {operation === "selecting" ? (
-            <p className="content-message" role="status">
-              読み込み中…
-            </p>
-          ) : detailError ? (
+          {detailError ? (
             <p className="content-message" role="alert">
               {detailError}
             </p>
@@ -118,9 +114,9 @@ function App() {
                 onSave={(body) => handleSaveContent({ body })}
               />
             </Fragment>
-          ) : (
+          ) : !loading && operation !== "selecting" ? (
             <p className="content-message">ページを選択してください。</p>
-          )}
+          ) : null}
         </section>
       </main>
     </div>

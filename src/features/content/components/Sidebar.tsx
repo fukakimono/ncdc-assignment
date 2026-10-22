@@ -30,16 +30,12 @@ export function Sidebar({
   const busy = operation !== "idle";
 
   return (
-    <aside className="sidebar" aria-label="ページ一覧">
+    <aside className="sidebar" aria-label="ページ一覧" aria-busy={loading}>
       <div className="service-name">
         <img src={logo} alt="" width="32" height="32" />
         <span>ServiceName</span>
       </div>
-      {loading ? (
-        <p className="sidebar-message" role="status">
-          読み込み中…
-        </p>
-      ) : error ? (
+      {loading ? null : error ? (
         <p className="sidebar-message" role="alert">
           {error}
         </p>
