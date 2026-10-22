@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 280px;
+  height: 100vh;
   flex-shrink: 0;
   border-right: 1px solid #f6f8fa;
   padding-top: 30px;
@@ -9,6 +10,7 @@
 
 .service-name {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 4px;
   width: 200px;
@@ -20,15 +22,17 @@
 }
 
 .page-list {
+  flex: 1;
+  min-height: 0;
   margin: 0;
   padding: 0 0 0 40px;
+  overflow-y: auto;
   list-style: none;
 }
 
 .page-list-item {
   display: flex;
   align-items: center;
-  width: 240px;
 }
 
 .page-list-button {
@@ -42,6 +46,7 @@
   font: inherit;
   line-height: 24px;
   text-align: left;
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
 
@@ -87,6 +92,7 @@
 
 .sidebar-actions {
   display: flex;
+  flex-shrink: 0;
   margin-top: auto;
   padding: 10px 10px 10px 40px;
   background: #f6f8fa;

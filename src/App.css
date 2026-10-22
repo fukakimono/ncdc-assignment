@@ -13,7 +13,7 @@
 .content-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 90px;
-  grid-template-rows: 40px minmax(0, 1fr);
+  grid-template-rows: minmax(40px, auto) minmax(0, 1fr);
   gap: 20px;
   height: 100%;
   padding: 30px;
@@ -28,6 +28,7 @@
   font-size: 24px;
   line-height: 40px;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .content-message {
