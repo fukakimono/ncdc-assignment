@@ -28,3 +28,25 @@ npm run format:check  # フォーマット確認
 提供されたアイコンを`src/assets/img/icon/`に置いている。importには`@assets`を使える。
 
 Noto Sans JPはGoogle Fontsから読み込んでいる。
+
+## バックエンドの起動
+
+[ncdcdev/recruit-frontend](https://github.com/ncdcdev/recruit-frontend)を別途cloneして、そちらで実行する。
+
+```bash
+npm ci
+npm run migration:run
+npm run build
+npm run start
+```
+
+接続先は`http://localhost:3000/content`。`src/features/content/api.ts`に定義している。
+API仕様は起動後の[Swagger](http://localhost:3000/api)で確認できる。
+
+## 実装について
+
+ページ関連の型・API・コンポーネントは`src/features/content/`にまとめた。API通信は`api.ts`に分け、`App.tsx`で取得結果を管理している。
+
+画面遷移がないのでRouterは使っていない。
+
+タイトルがnullか空文字のページは「無題」と表示する。
