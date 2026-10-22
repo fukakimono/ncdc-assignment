@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
+import { TitleEditor } from "./features/content/components/TitleEditor";
 import { Sidebar } from "./features/content/components/Sidebar";
-import { createContent, deleteContent, getContent, getContents } from "./features/content/api";
+import {
+  createContent,
+  deleteContent,
+  getContent,
+  getContents,
+  updateContent,
+} from "./features/content/api";
 import type { Content, ContentOperation } from "./features/content/types";
 import "./App.css";
 
@@ -60,6 +67,19 @@ function App() {
       .finally(() => setOperation("idle"));
   };
 
+  const handleSaveTitle = async (title: string) => {
+    if (!selectedContent) return;
+
+    setOperation("saving");
+    try {
+      const content = await updateContent(selectedContent.id, { title });
+      setSelectedContent(content);
+      setContents((current) => current.map((item) => (item.id === content.id ? content : item)));
+    } finally {
+      setOperation("idle");
+    }
+  };
+
   return (
     <div className="app">
       <Sidebar
@@ -84,8 +104,13 @@ function App() {
             </p>
           ) : selectedContent ? (
             <>
-              {/* APIはタイトルにnull・空文字を許容するため、表示時のみ「無題」で補う */}
-              <h1 className="content-title">{selectedContent.title || "無題"}</h1>
+              <TitleEditor
+                key={selectedContent.id}
+                title={selectedContent.title}
+                saving={operation === "saving"}
+                disabled={operation !== "idle"}
+                onSave={handleSaveTitle}
+              />
               <p className="content-body">{selectedContent.body}</p>
             </>
           ) : (

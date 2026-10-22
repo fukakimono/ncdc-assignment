@@ -23,6 +23,14 @@
   color: #4cb3f8;
 }
 
+.button--neutral {
+  background: #b3b3b3;
+}
+
+.button--small {
+  width: 40px;
+}
+
 .button--primary:hover:not(:disabled) {
   background: #3c8ec4;
 }
@@ -37,6 +45,14 @@
 
 .button--secondary:active:not(:disabled) {
   background: #b3b3b3;
+}
+
+.button--neutral:hover:not(:disabled) {
+  background: #999999;
+}
+
+.button--neutral:active:not(:disabled) {
+  background: #808080;
 }
 
 .button:disabled {
