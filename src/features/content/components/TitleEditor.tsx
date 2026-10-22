@@ -42,6 +42,7 @@ export function TitleEditor({ title, saving, disabled, onSave }: TitleEditorProp
             className="title-input"
             aria-label="タイトル"
             aria-describedby={error ? "title-count title-error" : "title-count"}
+            placeholder="タイトルを入力"
             maxLength={50}
             value={draft}
             onChange={(event) => setDraft(event.target.value)}

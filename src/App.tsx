@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { BodyEditor } from "./features/content/components/BodyEditor";
 import { TitleEditor } from "./features/content/components/TitleEditor";
 import { Sidebar } from "./features/content/components/Sidebar";
 import {
@@ -8,7 +9,7 @@ import {
   getContents,
   updateContent,
 } from "./features/content/api";
-import type { Content, ContentOperation } from "./features/content/types";
+import type { Content, ContentOperation, UpdateContentInput } from "./features/content/types";
 import "./App.css";
 
 function App() {
@@ -41,8 +42,8 @@ function App() {
     setDetailError(null);
 
     createContent({
-      title: "新しいページ",
-      body: "ここに本文を入力してください。",
+      title: "",
+      body: "",
     })
       .then((content) => {
         setContents((current) => [...current, content]);
@@ -67,12 +68,12 @@ function App() {
       .finally(() => setOperation("idle"));
   };
 
-  const handleSaveTitle = async (title: string) => {
+  const handleSaveContent = async (input: UpdateContentInput) => {
     if (!selectedContent) return;
 
     setOperation("saving");
     try {
-      const content = await updateContent(selectedContent.id, { title });
+      const content = await updateContent(selectedContent.id, input);
       setSelectedContent(content);
       setContents((current) => current.map((item) => (item.id === content.id ? content : item)));
     } finally {
@@ -103,16 +104,20 @@ function App() {
               {detailError}
             </p>
           ) : selectedContent ? (
-            <>
+            <Fragment key={selectedContent.id}>
               <TitleEditor
-                key={selectedContent.id}
                 title={selectedContent.title}
                 saving={operation === "saving"}
                 disabled={operation !== "idle"}
-                onSave={handleSaveTitle}
+                onSave={(title) => handleSaveContent({ title })}
               />
-              <p className="content-body">{selectedContent.body}</p>
-            </>
+              <BodyEditor
+                body={selectedContent.body}
+                saving={operation === "saving"}
+                disabled={operation !== "idle"}
+                onSave={(body) => handleSaveContent({ body })}
+              />
+            </Fragment>
           ) : (
             <p className="content-message">ページを選択してください。</p>
           )}
